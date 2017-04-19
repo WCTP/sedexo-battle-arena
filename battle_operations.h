@@ -23,41 +23,21 @@
  *
  ***********************************************************************************************/
 
-#ifndef PLAYER_H
-#define PLAYER_H
+#ifndef BATTLE_OPERATIONS_H
+#define BATTLE_OPERATIONS_H
 
 #include <iostream>
 #include <string>
-#include <iomanip>
 #include "entity.h"
 
 using namespace std;
 
-class Player : public Entity
-{
-	protected:
-		int mExp, mExpToLevel, mMoney, mLevel;
+void attack();		// placeholder, function needs redefining
+int battleMenu();
+void battleOperations();	// placeholder, function needs redefining
+Entity* initializeBattle();	// placeholder, function needs redefining
+void useItem();		// placeholder, function needs redefining
+void useSkill();	// placeholder, function needs redefining
 
-	public:
-		/* Constructors and Destructors*/
-		Player();
-		Player(string name, int health, int maxHealth, int speed, int attack, int defense, int exp, int expToLevel, int money, int level);
-
-		~Player();
-
-		/* Getters */
-		int getExp();
-		int getExpToLevel();
-		int getLevel();
-		int getMoney();
-
-		/* Setters */
-		void setExp(int exp);
-		void setExpToLevel(int expToLevel);
-		void setLevel(int level);
-		void setMoney(int money);
-
-		Player generatePlayer();
-};
 
 #endif

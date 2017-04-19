@@ -23,41 +23,10 @@
  *
  ***********************************************************************************************/
 
-#ifndef PLAYER_H
-#define PLAYER_H
+#ifndef CONSTANTS_H
+#define CONSTANTS_H
 
-#include <iostream>
-#include <string>
-#include <iomanip>
-#include "entity.h"
-
-using namespace std;
-
-class Player : public Entity
-{
-	protected:
-		int mExp, mExpToLevel, mMoney, mLevel;
-
-	public:
-		/* Constructors and Destructors*/
-		Player();
-		Player(string name, int health, int maxHealth, int speed, int attack, int defense, int exp, int expToLevel, int money, int level);
-
-		~Player();
-
-		/* Getters */
-		int getExp();
-		int getExpToLevel();
-		int getLevel();
-		int getMoney();
-
-		/* Setters */
-		void setExp(int exp);
-		void setExpToLevel(int expToLevel);
-		void setLevel(int level);
-		void setMoney(int money);
-
-		Player generatePlayer();
-};
+enum BATTLE_OP { ATTACK = 1, SKILLS, ITEMS };
+enum REST_OP { EXPLORE = 1, BATTLE };
 
 #endif

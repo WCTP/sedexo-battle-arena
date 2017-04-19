@@ -23,41 +23,38 @@
  *
  ***********************************************************************************************/
 
-#ifndef PLAYER_H
-#define PLAYER_H
+#ifndef SPECIAL_ABILITY_H
+#define SPECIAL_ABILITY_H
 
 #include <iostream>
 #include <string>
 #include <iomanip>
-#include "entity.h"
 
 using namespace std;
 
-class Player : public Entity
+class SpecialAbility
 {
 	protected:
-		int mExp, mExpToLevel, mMoney, mLevel;
+		int mUses;
+		string mName;
+		bool mPossess;
 
 	public:
 		/* Constructors and Destructors*/
-		Player();
-		Player(string name, int health, int maxHealth, int speed, int attack, int defense, int exp, int expToLevel, int money, int level);
+		SpecialAbility();
+		SpecialAbility(int uses, string name, bool possess);
 
-		~Player();
+		~SpecialAbility();
 
 		/* Getters */
-		int getExp();
-		int getExpToLevel();
-		int getLevel();
-		int getMoney();
+		string getName();
+		bool getPossess();
+		int getUses();
 
 		/* Setters */
-		void setExp(int exp);
-		void setExpToLevel(int expToLevel);
-		void setLevel(int level);
-		void setMoney(int money);
-
-		Player generatePlayer();
+		void setName(string name);
+		void setPossess(bool possess);
+		void setUses(int uses);
 };
 
 #endif

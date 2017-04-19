@@ -23,41 +23,15 @@
  *
  ***********************************************************************************************/
 
-#ifndef PLAYER_H
-#define PLAYER_H
+#ifndef REST_OPERATIONS_H
+#define REST_OPERATIONS_H
 
 #include <iostream>
 #include <string>
-#include <iomanip>
-#include "entity.h"
+#include "constants.h"
 
-using namespace std;
-
-class Player : public Entity
-{
-	protected:
-		int mExp, mExpToLevel, mMoney, mLevel;
-
-	public:
-		/* Constructors and Destructors*/
-		Player();
-		Player(string name, int health, int maxHealth, int speed, int attack, int defense, int exp, int expToLevel, int money, int level);
-
-		~Player();
-
-		/* Getters */
-		int getExp();
-		int getExpToLevel();
-		int getLevel();
-		int getMoney();
-
-		/* Setters */
-		void setExp(int exp);
-		void setExpToLevel(int expToLevel);
-		void setLevel(int level);
-		void setMoney(int money);
-
-		Player generatePlayer();
-};
+void explore();
+int restMenu();
+void restOperations();
 
 #endif

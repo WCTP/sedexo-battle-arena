@@ -23,41 +23,23 @@
  *
  ***********************************************************************************************/
 
-#ifndef PLAYER_H
-#define PLAYER_H
+#include "skill.h"
 
-#include <iostream>
-#include <string>
-#include <iomanip>
-#include "entity.h"
 
-using namespace std;
-
-class Player : public Entity
+/*		Pre: none
+ *	   Post: none
+ *	Purpose: default constructor
+ *********************************************************/
+Skill::Skill() : SpecialAbility()
 {
-	protected:
-		int mExp, mExpToLevel, mMoney, mLevel;
+	/* needs to be written */
+}
 
-	public:
-		/* Constructors and Destructors*/
-		Player();
-		Player(string name, int health, int maxHealth, int speed, int attack, int defense, int exp, int expToLevel, int money, int level);
-
-		~Player();
-
-		/* Getters */
-		int getExp();
-		int getExpToLevel();
-		int getLevel();
-		int getMoney();
-
-		/* Setters */
-		void setExp(int exp);
-		void setExpToLevel(int expToLevel);
-		void setLevel(int level);
-		void setMoney(int money);
-
-		Player generatePlayer();
-};
-
-#endif
+/*		Pre: none
+ *	   Post: none
+ *	Purpose: destructor
+ *********************************************************/
+Skill::~Skill()
+{
+	/* left blank intentionally */
+}

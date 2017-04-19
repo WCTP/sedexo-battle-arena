@@ -23,130 +23,90 @@
  *
  ***********************************************************************************************/
 
-#include "player.h"
+#include "special_ability.h"
 
 
 /*		Pre: none
  *	   Post: none
  *	Purpose: default constructor
  *********************************************************/
-Player::Player() : Entity()
+SpecialAbility::SpecialAbility()
 {
-	mExp = 0;
-	mExpToLevel = 0;
-	mMoney = 0;
-	mLevel = 0;
+	mName = "";
+	mUses = 0;
+	mPossess = false;
 }
 
 /*		Pre: none
  *	   Post: none
  *	Purpose: constructor
  *********************************************************/
-Player::Player(string name, int health, int maxHealth, int speed, int attack, int defense, int exp, int expToLevel, int money, int level)
+SpecialAbility::SpecialAbility(int uses, string name, bool possess)
 {
+	mUses = uses;
 	mName = name;
-	mHealth = health;
-	mMaxHealth = maxHealth;
-	mSpeed = speed;
-	mAttack = attack;
-	mDefense = defense;
-	mExp = exp;
-	mExpToLevel = expToLevel;
-	mMoney = money;
-	mLevel = level;
+	mPossess = possess;
 }
 
 /*		Pre: none
  *	   Post: none
  *	Purpose: destructor
  *********************************************************/
-Player::~Player()
+SpecialAbility::~SpecialAbility()
 {
 	/* left blank intentionally */
 }
 
 /*		Pre: none
- *	   Post: int
- *	Purpose: retrieves exp
+ *	   Post: none
+ *	Purpose: retrieves name
  *********************************************************/
-int Player::getExp()
+string SpecialAbility::getName()
 {
-	return mExp;
+	return mName;
 }
 
 /*		Pre: none
- *	   Post: int
- *	Purpose: retrieves exp to level
+ *	   Post: none
+ *	Purpose: retrieves possess
  *********************************************************/
-int Player::getExpToLevel()
+bool SpecialAbility::getPossess()
 {
-	return mExpToLevel;
+	return mPossess;
 }
 
 /*		Pre: none
- *	   Post: int
- *	Purpose: retrieves level
+ *	   Post: none
+ *	Purpose: retrieves possess
  *********************************************************/
-int Player::getLevel()
+int SpecialAbility::getUses()
 {
-	return mLevel;
+	return mUses;
 }
 
 /*		Pre: none
- *	   Post: int
- *	Purpose: retrieves money
- *********************************************************/
-int Player::getMoney()
-{
-	return mMoney;
-}
-
-/*		Pre: int
  *	   Post: none
- *	Purpose: sets exp
+ *	Purpose: sets name
  *********************************************************/
-void Player::setExp(int exp)
+void SpecialAbility::setName(string name)
 {
-	mExp = exp;
-}
-
-/*		Pre: int
- *	   Post: none
- *	Purpose: sets exp to level
- *********************************************************/
-void Player::setExpToLevel(int expToLevel)
-{
-	mExpToLevel = expToLevel;
-}
-
-/*		Pre: int
- *	   Post: none
- *	Purpose: sets level
- *********************************************************/
-void Player::setLevel(int level)
-{
-	mLevel = level;
-}
-
-/*		Pre: int
- *	   Post: none
- *	Purpose: sets money
- *********************************************************/
-void Player::setMoney(int money)
-{
-	mMoney = money;
+	mName = name;
 }
 
 /*		Pre: none
- *	   Post: Player
- *	Purpose: asks user what class they would like to be
- *			 and generates a character accordingly
+ *	   Post: none
+ *	Purpose: sets possess
  *********************************************************/
-Player Player::generatePlayer()
+void SpecialAbility::setPossess(bool possess)
 {
-	Player player;
+	mPossess = possess;
+}
 
-	cout << "--------------------------------------------";
-
-	return player;
+/*		Pre: none
+ *	   Post: none
+ *	Purpose: sets uses
+ *********************************************************/
+void SpecialAbility::setUses(int uses)
+{
+	mUses = uses;
 }
