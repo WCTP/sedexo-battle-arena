@@ -27,8 +27,21 @@
 int main()
 {
 	Entity person("Wawa", 5, 10, 3, 2, 1);
+
+	srand(time(NULL));
 	
-	cout << person;
+	cout << person << endl;
+
+	cout << person.rollInitiative() << endl;
+	cout << person.rollInitiative() << endl;
+	cout << person.rollInitiative() << endl;
+	cout << person.rollInitiative() << endl;
+	cout << person.rollInitiative() << endl;
+	cout << person.rollInitiative() << endl;
+	cout << person.rollInitiative() << endl;
+	cout << person.rollInitiative() << endl;
+	cout << person.rollInitiative() << endl;
+	cout << person.rollInitiative() << endl;
 
 	system("pause");
 

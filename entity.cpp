@@ -23,6 +23,7 @@
  *
  ***********************************************************************************************/
 
+#include "constants.h"
 #include "entity.h"
 
 
@@ -169,6 +170,18 @@ void Entity::setName(string name)
 void Entity::setSpeed(int speed)
 {
 	mSpeed = speed;
+}
+/*      Pre: none
+ *     Post: int
+ *	Purpose: rolls iniative based on speed and max value
+ *********************************************************/
+int Entity::rollInitiative()
+{
+	int initiative;
+
+	initiative = ((rand() % MAX_INITIATIVE) + 1 + mSpeed);
+
+	return initiative;
 }
 
 /*      Pre: ostream

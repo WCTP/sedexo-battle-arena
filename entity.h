@@ -29,6 +29,7 @@
 #include <iostream>
 #include <string>
 #include <iomanip>
+#include <ctime>
 
 using namespace std;
 
@@ -62,6 +63,8 @@ class Entity
 		void setSpeed(int speed);
 
 		/* Other Functions */
+		int rollInitiative();
+
 		friend ostream& operator<<(ostream& output, Entity obj);
 
 };
