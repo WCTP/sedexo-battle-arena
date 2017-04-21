@@ -30,6 +30,7 @@
 #include <string>
 #include <iomanip>
 #include "entity.h"
+#include "constants.h"
 
 using namespace std;
 
@@ -58,6 +59,7 @@ class Player : public Entity
 		void setMoney(int money);
 
 		Player generatePlayer();
+		void levelUp(Player player);
 };
 
 #endif

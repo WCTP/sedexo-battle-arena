@@ -150,3 +150,11 @@ Player Player::generatePlayer()
 
 	return player;
 }
+
+void Player::levelUp(Player player)
+{
+	mMaxHealth += ((rand() % HEALTH_LEVEL_UP_ROLL) + 1);
+	mSpeed += ((rand() % LEVEL_UP_ROLL) + 1);
+	mAttack += ((rand() % LEVEL_UP_ROLL) + 1);
+	mDefense += ((rand() % LEVEL_UP_ROLL) + 1);
+}

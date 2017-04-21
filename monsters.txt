@@ -1,0 +1,52 @@
+Name
+Health 	Max_Health
+Speed 	Attack 		Defense
+Exp_Awarded
+Pizza
+1 1
+1 1 1
+10
+Bread Sticks
+5 5
+1 1 1
+13
+Marinara Sauce
+3 3
+0 2 4
+40
+Crouton
+10 10
+5 0 0
+30
+Cucumber
+7 7
+2 2 2
+22
+Carrot
+5 5
+3 4 0
+28
+Lettuce
+50 50
+5 5 5
+100
+Kung Pao Chicken
+20 20
+10 9 8
+33
+Ramen
+26 26
+4 8 14
+42
+General Tso Beef
+40 40
+14 8 8
+50
+Flavored Water
+100 100
+20 5 2
+210
+Cheese Burger
+53 53
+10 10 10
+69
