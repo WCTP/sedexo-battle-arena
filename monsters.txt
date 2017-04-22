@@ -50,3 +50,19 @@ Cheese Burger
 53 53
 10 10 10
 69
+Pulled Pork Burger
+74 74
+8 13 12
+72
+French Fries
+123 123
+18 6 3
+123
+Fried Chicken
+90 90
+9 10 15
+100
+Chimichanga
+82 82
+12 12 12
+111
