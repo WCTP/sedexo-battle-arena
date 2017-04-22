@@ -66,3 +66,107 @@ Chimichanga
 82 82
 12 12 12
 111
+Mashed Potato
+120 120
+10 18 20
+121
+Shepherds Pie
+90 90
+12 15 25
+133
+Pasta
+80 80
+20 10 15
+145
+Chicken Parm Sandwhich
+95 95
+17 17 17
+155
+Scrambled Eggs
+300 300
+6 10 11
+200
+Omelette
+350 350
+4 9 10
+201
+Turkey Ruben
+30 30
+10 30 0
+50
+Sweet Potato
+60 60
+20 25 0
+75
+Lasagna
+44 44
+15 15 30
+135
+Bacon
+400 400
+2 10 14
+240
+Garlic Bread
+99 99
+40 14 18
+189
+Nachos
+69 69
+69 1 2
+5
+Fruit Nachos
+500 500
+100 15 8
+420
+Philly Cheese Steak
+1000 1000
+2 19 0
+1000
+Chocolate Milk
+90 90
+20 20 20
+320
+Bagel
+678 678
+20 25 25
+450
+Apple
+777 777
+100 40 0
+777
+Orange
+5 5
+0 10 50
+50
+Pair
+212 212
+20 23 15
+444
+Jello
+369 369
+30 34 14
+370
+Cheesecake
+2000 2000
+2000 0 0
+200
+Brownie
+500
+45 46 33
+645
+Blondie
+666
+666 44 8
+666
+Cookie
+20
+20 33 50
+505
+Hot Chocolate
+898
+40 50 33
+999
+Cereal
+2016 2016
+24 25 72
+12345
