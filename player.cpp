@@ -144,10 +144,15 @@ void Player::setMoney(int money)
  *********************************************************/
 Player Player::generatePlayer()
 {
-	Player player;
+	
+	string name;
 
-	cout << "--------------------------------------------";
+	cout << "Enter a Name: ";
+	getline(cin, name);
 
+	/* default stats a player gets */
+	Player player(name, 10, 10, 2, 2, 2, 0, 25, 0, 1);
+	
 	return player;
 }
 
@@ -157,4 +162,5 @@ void Player::levelUp(Player player)
 	mSpeed += ((rand() % LEVEL_UP_ROLL) + 1);
 	mAttack += ((rand() % LEVEL_UP_ROLL) + 1);
 	mDefense += ((rand() % LEVEL_UP_ROLL) + 1);
+	mExpToLevel += mExpToLevel * ((rand() % 2) + 2);
 }
