@@ -29,9 +29,12 @@
 #include <iostream>
 #include <string>
 #include "constants.h"
+#include "player.h"
+#include "monster.h"
 
 void explore();
-int restMenu();
-void restOperations();
+void notifyInvalid();
+int restMenu(Player player, string stage);
+void restOperations(Player player, string stage, Monster monsters[]);
 
 #endif

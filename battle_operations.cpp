@@ -23,23 +23,32 @@
  *
  ***********************************************************************************************/
 
+#include "monster.h"
+#include "player.h"
 #include "constants.h"
 #include "battle_operations.h"
 
-/*		Pre: none
+/*		Pre: Player, Monster
  *	   Post: none
- *	Purpose: none
+ *	Purpose: sets health to appropriate levels
  *********************************************************/
-void attack()
+void attack(Player& player, Monster& monster)
 {
-	/* needs to be written */
+	if (player.getDefense() < monster.getAttack())
+	{
+		player.setHealth(player.getHealth() - (monster.getAttack() - player.getDefense()));
+	}
+	if (monster.getDefense() < player.getAttack())
+	{
+		monster.setHealth(monster.getHealth() - (player.getAttack() - monster.getDefense()));
+	}	
 }
 
 /*		Pre: none
  *	   Post: int
  *	Purpose: shows options in battle and gets input
  *********************************************************/
-int battleMenu()
+int battleMenu(Player player, Monster monster)
 {
 	int input;
 
@@ -47,6 +56,21 @@ int battleMenu()
 
 	cout	<< "--------------------------------------------" << endl
 			<< "-- BATTLE MENU                            --" << endl
+			<< "--------------------------------------------" << endl
+			<< "-- " << setw(20) << left << player.getName() << " HP: " 
+			<< setw(4) << player.getHealth() << " / "
+			<< setw(4) << player.getMaxHealth() << "   --" 
+			<< endl << "-- Atk: " 
+			<< setw(4) << player.getAttack() << " Def: "
+			<< setw(4) << player.getDefense() << " Spd: "
+			<< setw(4) << player.getSpeed() << "          --" << endl
+			<< "-- " << setw(20) << left << monster.getName() << " HP: "
+			<< setw(4) << monster.getHealth() << " / "
+			<< setw(4) << monster.getMaxHealth() << "   --" 
+			<< endl << "-- Atk: "
+			<< setw(4) << monster.getAttack() << " Def: "
+			<< setw(4) << monster.getDefense() << " Spd: "
+			<< setw(4) << monster.getSpeed() << "          --" << endl
 			<< "--------------------------------------------" << endl
 			<< "-- 1.) Attack                             --" << endl
 			<< "-- 2.) Skills                             --" << endl
@@ -65,18 +89,18 @@ int battleMenu()
  *	   Post: none
  *	Purpose: executes command based on input
  *********************************************************/
-void battleOperations()
+void battleOperations(Player& player, string stage, Monster monster, int playerInt, int monsterInt)
 {
 	int input = 1;
 
 	do
 	{
-		input = battleMenu();
+		input = battleMenu(player, monster);
 
 		switch (input)
 		{
 			case ATTACK : 
-				attack();
+				attack(player, monster);
 				break;
 			case SKILLS :
 				useSkill();
@@ -88,19 +112,47 @@ void battleOperations()
 				cout << "INVALID COMMAND";
 		}
 
-	} while (input < ITEMS && input > ATTACK);
+	} while (player.getHealth() > 0 && monster.getHealth() > 0);
+
+	postBattle(player, monster);
+}
+
+/*		Pre: Player, string, Monster, int, int
+ *	   Post: Monster
+ *	Purpose: initializes initiatives  and monster
+ *********************************************************/
+Monster initializeBattle(Player player, string stage, Monster monsters[], int& playerInt, int& monsterInt)
+{
+	Monster monster(stage, monsters);
+
+	playerInt = ((rand() % MAX_INITIATIVE) + player.getSpeed());
+	monsterInt = ((rand() % MAX_INITIATIVE) + monster.getSpeed());
+
+	return monster;
 }
 
 /*		Pre: none
  *	   Post: none
  *	Purpose: none
  *********************************************************/
-Entity* initializeBattle()
+void postBattle(Player& player, Monster monster)
 {
-	/* needs to be written */
-	Entity* person = NULL;
+	if (player.getHealth() > 0)
+	{
+		player.setExp(player.getExp() + monster.getExpAwarded());
+	}
+	else
+	{
+		cout << "You died." << endl;
+		system("pause");
+	}
 
-	return person;
+	if (player.getExp() > player.getExpToLevel())
+	{
+		cout << "LEVEL UP!" << endl;
+		player.levelUp();
+		system("pause");
+	}
 }
 
 /*		Pre: none

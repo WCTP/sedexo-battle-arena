@@ -35,21 +35,36 @@ void explore()
 	/* needs to be written */
 }
 
+void notifyInvalid()
+{
+	cout << "  INVALID COMMAND" << endl << "  ";
+	system("pause");
+}
+
 /*		Pre: none
  *	   Post: none
  *	Purpose: displays rest menu and gets input
  *********************************************************/
-int restMenu()
+int restMenu(Player player, string stage)
 {
 	int input;
 
 	system("cls");
 
 	cout	<< "--------------------------------------------" << endl
-			<< "-- REST MENU                              --" << endl
+			<< "-- REST MENU | STAGE: " << left << setw(20) << stage <<  "--" << endl
 			<< "--------------------------------------------" << endl
+			<< "-- " << setw(20) << left << player.getName() << " HP: " 
+			<< setw(4) << player.getHealth() << " / "
+			<< setw(4) << player.getMaxHealth() << "   --" 
+			<< endl << "-- Atk: " 
+			<< setw(4) << player.getAttack() << " Def: "
+			<< setw(4) << player.getDefense() << " Spd: "
+			<< setw(4) << player.getSpeed() << " Xp: " 
+			<< setw(5) << player.getExp() << "--" << endl
 			<< "-- 1.) Explore                            --" << endl
 			<< "-- 2.) Battle                             --" << endl
+			<< "-- 3.) Face Boss                          --" << endl
 			<< "--------------------------------------------" << endl
 			<< "  Command: ";
 
@@ -64,25 +79,9 @@ int restMenu()
  *	   Post: none
  *	Purpose: executes command based on input
  *********************************************************/
-void restOperations()
+void restOperations(Player player, string stage, Monster monsters[])
 {
 	int input = 1;
 
-	do
-	{
-		input = restMenu();
-
-		switch (input)
-		{
-			case EXPLORE : 
-				explore();
-				break;
-			case BATTLE :
-				battleOperations();
-				break;
-			default :
-				cout << "INVALID COMMAND";
-		}
-
-	} while (input < ITEMS && input > ATTACK);
+	// put in main, function needs to be deleted
 }

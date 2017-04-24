@@ -29,13 +29,16 @@
 #include <iostream>
 #include <string>
 #include "entity.h"
+#include "player.h"
+#include "monster.h"
 
 using namespace std;
 
-void attack();		// placeholder, function needs redefining
-int battleMenu();
-void battleOperations();	// placeholder, function needs redefining
-Entity* initializeBattle();	// placeholder, function needs redefining
+void attack(Player& player, Monster& monster);		// placeholder, function needs redefining
+int battleMenu(Player player, Monster monster);
+void battleOperations(Player& player, string stage, Monster monster, int playerInt, int monsterInt);
+Monster initializeBattle(Player player, string stage, Monster monsters[], int& playerInt, int& monsterInt);
+void postBattle(Player& player, Monster monster);
 void useItem();		// placeholder, function needs redefining
 void useSkill();	// placeholder, function needs redefining
 

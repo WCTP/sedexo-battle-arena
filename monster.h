@@ -42,7 +42,7 @@ class Monster : public Entity
 		/* Constructors and Destructors*/
 		Monster();
 		Monster(string name, int health, int maxHealth, int speed, int attack, int defense, int expAwarded);
-		Monster(int id);
+		Monster(string stage, Monster monsters[]);
 
 		~Monster();
 
@@ -52,6 +52,8 @@ class Monster : public Entity
 		/* Setters */
 		void setExpAwarded(int expAwarded);
 		
+		/* Other Functions */
+		friend void loadMonsters(Monster monsters[]);
 };
 
 #endif

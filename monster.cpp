@@ -24,6 +24,7 @@
  ***********************************************************************************************/
 
 #include "monster.h"
+#include "constants.h"
 
 
 /*		Pre: none
@@ -52,6 +53,52 @@ Monster::Monster(string name, int health, int maxHealth, int speed, int attack, 
 
 /*		Pre: none
  *	   Post: none
+ *	Purpose: constructs based off of id
+ *********************************************************/
+Monster::Monster(string stage, Monster monsters[])
+{
+	int monsterIndex;
+
+	if (stage == FIRST_STAGE)
+	{
+		monsterIndex = (rand() % FIRST_STAGE_MONSTER_NUM);
+	}
+	else if (stage == SECOND_STAGE)
+	{
+		monsterIndex = ((rand() % SECOND_STAGE_MONSTER_NUM) + FIRST_BOSS_INDEX + 1);
+	}
+	else if (stage == THIRD_STAGE)
+	{
+		monsterIndex = ((rand() % THIRD_STAGE_MONSTER_NUM) + SECOND_BOSS_INDEX + 1);
+	}
+	else if (stage == FOURTH_STAGE)
+	{
+		monsterIndex = ((rand() % FOURTH_STAGE_MONSTER_NUM) + THIRD_BOSS_INDEX + 1);
+	}
+	else if (stage == FIFTH_STAGE)
+	{
+		monsterIndex = ((rand() % FIFTH_STAGE_MONSTER_NUM) + FOURTH_BOSS_INDEX + 1);
+	}
+	else if (stage == SIXTH_STAGE)
+	{
+		monsterIndex = ((rand() % SIXTH_STAGE_MONSTER_NUM) + FIFTH_BOSS_INDEX + 1);
+	}
+	else if (stage == SEVENTH_STAGE)
+	{
+		monsterIndex = ((rand() % SEVENTH_STAGE_MONSTER_NUM) + SIXTH_BOSS_INDEX + 1);
+	}
+
+	mName = monsters[monsterIndex].getName();
+	mHealth = monsters[monsterIndex].getHealth();
+	mMaxHealth = monsters[monsterIndex].getMaxHealth();
+	mSpeed = monsters[monsterIndex].getSpeed();
+	mAttack = monsters[monsterIndex].getAttack();
+	mDefense = monsters[monsterIndex].getDefense();
+	mExpAwarded = monsters[monsterIndex].getExpAwarded();
+}
+
+/*		Pre: none
+ *	   Post: none
  *	Purpose: destructor
  *********************************************************/
 Monster::~Monster()
@@ -75,4 +122,31 @@ int Monster::getExpAwarded()
 void Monster::setExpAwarded(int expAwarded)
 {
 	mExpAwarded = expAwarded;
+}
+
+/*		Pre: Monster array
+ *	   Post: none
+ *	Purpose: loads up monster array with monster text file
+ *********************************************************/
+void loadMonsters(Monster monsters[])
+{
+	ifstream fin;
+	fin.open(MONSTER_FILE);
+
+	for (int i = 0; i < NUMBER_OF_MONSTERS; i++)
+	{
+		getline(fin, monsters[i].mName);
+
+		fin >> monsters[i].mHealth;
+		fin >> monsters[i].mMaxHealth;
+		fin.ignore();
+		fin >> monsters[i].mSpeed;
+		fin >> monsters[i].mAttack;
+		fin >> monsters[i].mDefense;
+		fin.ignore();
+		fin >> monsters[i].mExpAwarded;
+		fin.ignore();
+	}
+
+	fin.close();
 }

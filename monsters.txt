@@ -1,7 +1,3 @@
-Name
-Health 	Max_Health
-Speed 	Attack 		Defense
-Exp_Awarded
 Pizza
 1 1
 1 1 1

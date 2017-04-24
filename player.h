@@ -58,8 +58,8 @@ class Player : public Entity
 		void setLevel(int level);
 		void setMoney(int money);
 
-		Player generatePlayer();
-		void levelUp(Player player);
+		friend Player generatePlayer();
+		void levelUp();
 };
 
 #endif

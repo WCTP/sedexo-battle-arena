@@ -22,7 +22,6 @@
  *				the purpose of future plagiarism checking)
  *
  ***********************************************************************************************/
-/*
 #include "entity.h"
 #include "player.h"
 #include "monster.h"
@@ -31,17 +30,42 @@
 
 int main()
 {
-	Player person("Wawa", 5, 10, 3, 2, 1, 0, 10, 0, 1);
-	Monster monster("Death", 3, 3, 2, 1, 1, 20);
+	Player player;
+	Monster monsters[NUMBER_OF_MONSTERS];
+	Monster monster;
 	string stage = FIRST_STAGE;
-
-	srand(time(NULL));
+	int playerInt, monsterInt, input;
 	
-	battleMenu(person, monster);
-	restMenu(person);
+	srand(time(NULL));
+	loadMonsters(monsters);
+	player = generatePlayer();
+	
+	do
+	{
+
+		do
+		{
+			input = restMenu(player, stage);
+
+			switch (input)
+			{
+				case EXPLORE : 
+					explore();
+					break;
+				case BATTLE :
+					monster = initializeBattle(player, stage, monsters, playerInt, monsterInt);
+					battleOperations(player, stage, monster, playerInt, monsterInt);
+					break;
+				case FACE_BOSS :
+					break;
+				default :
+					notifyInvalid();
+			}
+
+		} while (input < EXPLORE && input > FACE_BOSS && player.getHealth() > 0);
+	} while (stage != FINISH);
 	
 	system("pause");
 
 	return 0;
 }
-*/

@@ -142,7 +142,7 @@ void Player::setMoney(int money)
  *	Purpose: asks user what class they would like to be
  *			 and generates a character accordingly
  *********************************************************/
-Player Player::generatePlayer()
+Player generatePlayer()
 {
 	
 	string name;
@@ -156,7 +156,7 @@ Player Player::generatePlayer()
 	return player;
 }
 
-void Player::levelUp(Player player)
+void Player::levelUp()
 {
 	mMaxHealth += ((rand() % HEALTH_LEVEL_UP_ROLL) + 1);
 	mSpeed += ((rand() % LEVEL_UP_ROLL) + 1);
