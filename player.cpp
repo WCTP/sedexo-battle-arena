@@ -158,9 +158,19 @@ Player generatePlayer()
 
 void Player::levelUp()
 {
+	mLevel++;
 	mMaxHealth += ((rand() % HEALTH_LEVEL_UP_ROLL) + 1);
 	mSpeed += ((rand() % LEVEL_UP_ROLL) + 1);
 	mAttack += ((rand() % LEVEL_UP_ROLL) + 1);
 	mDefense += ((rand() % LEVEL_UP_ROLL) + 1);
 	mExpToLevel += mExpToLevel * ((rand() % 2) + 2);
+
+	cout << right << setw(20) << "LEVEL UP!" << endl;
+	cout << setw(20) << "New Level: " << setw(3) << mLevel << endl;
+	cout << setw(20) << "HP: " << setw(3) << mMaxHealth << endl
+		 << setw(20) << "Attack: " << setw(3) << mAttack << endl
+		 << setw(20) << "Defense: " << setw(3) << mDefense << endl
+		 << setw(20) << "Speed: " << setw(3) << mSpeed << endl
+		 << setw(20) << "Xp to Next Level: " << setw(3) << mExpToLevel << endl;
+	system("pause");
 }

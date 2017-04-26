@@ -36,7 +36,10 @@ const int MAX_INITIATIVE = 20;
 const int MIN_INITIATIVE = 0;
 
 const int NUMBER_OF_MONSTERS = 42;
+const int NUMBER_OF_BOSSES = 7;
+const int NUMBER_OF_STAGES = 7;
 
+const int ATTACK_ROLE = 6;
 const int HEALTH_LEVEL_UP_ROLL = 8;
 const int LEVEL_UP_ROLL = 4;
 
@@ -57,6 +60,7 @@ const int SIXTH_STAGE_MONSTER_NUM = 5;
 const int SEVENTH_STAGE_MONSTER_NUM = 11;
 
 const string MONSTER_FILE = "monsters.txt";
+
 const string FIRST_STAGE = "PIZZA_LAND";
 const string SECOND_STAGE = "SALAD_LAND";
 const string THIRD_STAGE = "INTERNATIONAL_LAND";

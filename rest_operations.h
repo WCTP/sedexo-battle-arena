@@ -33,6 +33,7 @@
 #include "monster.h"
 
 void explore();
+void loadStages(string stages[]);
 void notifyInvalid();
 int restMenu(Player player, string stage);
 void restOperations(Player player, string stage, Monster monsters[]);

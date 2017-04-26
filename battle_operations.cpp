@@ -32,16 +32,41 @@
  *	   Post: none
  *	Purpose: sets health to appropriate levels
  *********************************************************/
-void attack(Player& player, Monster& monster)
+void attack(Player& player, Monster& monster, int playerInt, int monsterInt)
 {
-	if (player.getDefense() < monster.getAttack())
+	int playerAttack, monsterAttack;
+
+	playerAttack = ((player.getAttack() - monster.getDefense() + ((rand() % ATTACK_ROLE) + 1)));
+	monsterAttack = ((monster.getAttack() - player.getDefense() + ((rand() % ATTACK_ROLE) + 1)));
+
+	if (playerAttack < 0)
+		playerAttack = 0;
+	if (monsterAttack < 0)
+		monsterAttack = 0;
+
+	if (playerInt > monsterInt)
 	{
-		player.setHealth(player.getHealth() - (monster.getAttack() - player.getDefense()));
+		monster.setHealth(monster.getHealth() - playerAttack);
+		
+		if (player.getHealth() > 0)
+		{
+			player.setHealth(player.getHealth() - monsterAttack);		
+		}
 	}
-	if (monster.getDefense() < player.getAttack())
+	else
 	{
-		monster.setHealth(monster.getHealth() - (player.getAttack() - monster.getDefense()));
-	}	
+		player.setHealth(player.getHealth() - monsterAttack);
+		
+		if (player.getHealth() > 0)
+		{
+			monster.setHealth(monster.getHealth() - playerAttack);
+		}
+	}
+
+	cout << player.getName() << " took " << monsterAttack << " damage." << endl;
+	cout << monster.getName() << " took " << playerAttack << " damage." << endl;
+	system("pause");
+	
 }
 
 /*		Pre: none
@@ -89,7 +114,7 @@ int battleMenu(Player player, Monster monster)
  *	   Post: none
  *	Purpose: executes command based on input
  *********************************************************/
-void battleOperations(Player& player, string stage, Monster monster, int playerInt, int monsterInt)
+void battleOperations(Player& player, Monster monster, int playerInt, int monsterInt)
 {
 	int input = 1;
 
@@ -100,7 +125,7 @@ void battleOperations(Player& player, string stage, Monster monster, int playerI
 		switch (input)
 		{
 			case ATTACK : 
-				attack(player, monster);
+				attack(player, monster, playerInt, monsterInt);
 				break;
 			case SKILLS :
 				useSkill();
@@ -113,8 +138,6 @@ void battleOperations(Player& player, string stage, Monster monster, int playerI
 		}
 
 	} while (player.getHealth() > 0 && monster.getHealth() > 0);
-
-	postBattle(player, monster);
 }
 
 /*		Pre: Player, string, Monster, int, int
@@ -131,27 +154,39 @@ Monster initializeBattle(Player player, string stage, Monster monsters[], int& p
 	return monster;
 }
 
-/*		Pre: none
- *	   Post: none
- *	Purpose: none
+/*		Pre: Player, Monster, string, string array, int,
+ *			 bool
+ *	   Post: pass-by-reference string, string array, int
+ *	Purpose: handles post battle resetting of HP, leveling
+ *			 up, and stage progression
  *********************************************************/
-void postBattle(Player& player, Monster monster)
+void postBattle(Player& player, Monster monster, string& stage, string stages[], int& stageIndex, bool isBoss)
 {
+	system("cls");
+	
 	if (player.getHealth() > 0)
 	{
 		player.setExp(player.getExp() + monster.getExpAwarded());
+		player.setHealth(player.getMaxHealth());
+		
+		if (player.getExp() > player.getExpToLevel())
+		{
+			player.levelUp();
+		}
+		
+		cout << "You won!" << endl
+			 << "Xp Gained: " << monster.getExpAwarded() << endl;
+		system("pause");
+
+		if (isBoss == true)
+		{
+			stageIndex++;
+			stage = stages[stageIndex];
+		}
 	}
 	else
 	{
 		cout << "You died." << endl;
-		system("pause");
-	}
-
-	if (player.getExp() > player.getExpToLevel())
-	{
-		cout << "LEVEL UP!" << endl;
-		player.levelUp();
-		system("pause");
 	}
 }
 

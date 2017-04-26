@@ -34,11 +34,11 @@
 
 using namespace std;
 
-void attack(Player& player, Monster& monster);		// placeholder, function needs redefining
+void attack(Player& player, Monster& monster, int playerInt, int monsterInt);		// placeholder, function needs redefining
 int battleMenu(Player player, Monster monster);
-void battleOperations(Player& player, string stage, Monster monster, int playerInt, int monsterInt);
+void battleOperations(Player& player, Monster monster, int playerInt, int monsterInt);
 Monster initializeBattle(Player player, string stage, Monster monsters[], int& playerInt, int& monsterInt);
-void postBattle(Player& player, Monster monster);
+void postBattle(Player& player, Monster monster, string& stage, string stages[], int& stageIndex, bool isBoss);
 void useItem();		// placeholder, function needs redefining
 void useSkill();	// placeholder, function needs redefining
 

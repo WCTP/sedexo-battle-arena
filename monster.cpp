@@ -124,6 +124,29 @@ void Monster::setExpAwarded(int expAwarded)
 	mExpAwarded = expAwarded;
 }
 
+/*		Pre: Monster array, Monster array
+ *	   Post: none
+ *	Purpose: loads up bosses array with monsters array
+ *********************************************************/
+void loadBosses(Monster bosses[], Monster monsters[])
+{
+	int bossIndex = 0;
+
+	bosses[bossIndex] = monsters[FIRST_BOSS_INDEX];
+	bossIndex++;
+	bosses[bossIndex] = monsters[SECOND_BOSS_INDEX];
+	bossIndex++;
+	bosses[bossIndex] = monsters[THIRD_BOSS_INDEX];
+	bossIndex++;
+	bosses[bossIndex] = monsters[FOURTH_BOSS_INDEX];
+	bossIndex++;
+	bosses[bossIndex] = monsters[FIFTH_BOSS_INDEX];
+	bossIndex++;
+	bosses[bossIndex] = monsters[SIXTH_BOSS_INDEX];
+	bossIndex++;
+	bosses[bossIndex] = monsters[SEVENTH_BOSS_INDEX];
+}
+
 /*		Pre: Monster array
  *	   Post: none
  *	Purpose: loads up monster array with monster text file

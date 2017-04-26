@@ -35,6 +35,31 @@ void explore()
 	/* needs to be written */
 }
 
+/*		Pre: none
+ *	   Post: none
+ *	Purpose: loads stages into stage array
+ *********************************************************/
+void loadStages(string stages[])
+{
+	int stageIndex = 0;
+
+	stages[stageIndex] = FIRST_STAGE;
+	stageIndex++;
+	stages[stageIndex] = SECOND_STAGE;
+	stageIndex++;
+	stages[stageIndex] = THIRD_STAGE;
+	stageIndex++;
+	stages[stageIndex] = FOURTH_STAGE;
+	stageIndex++;
+	stages[stageIndex] = FIFTH_STAGE;
+	stageIndex++;
+	stages[stageIndex] = SIXTH_STAGE;
+	stageIndex++;
+	stages[stageIndex] = SEVENTH_STAGE;
+	stageIndex++;
+	stages[stageIndex] = FINISH;
+}
+
 void notifyInvalid()
 {
 	cout << "  INVALID COMMAND" << endl << "  ";
@@ -54,6 +79,8 @@ int restMenu(Player player, string stage)
 	cout	<< "--------------------------------------------" << endl
 			<< "-- REST MENU | STAGE: " << left << setw(20) << stage <<  "--" << endl
 			<< "--------------------------------------------" << endl
+			<< "-- Level: " << left << setw(3) << player.getLevel() 
+			<< "                             --" << endl
 			<< "-- " << setw(20) << left << player.getName() << " HP: " 
 			<< setw(4) << player.getHealth() << " / "
 			<< setw(4) << player.getMaxHealth() << "   --" 

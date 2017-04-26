@@ -54,6 +54,7 @@ class Monster : public Entity
 		
 		/* Other Functions */
 		friend void loadMonsters(Monster monsters[]);
+		friend void loadBosses(Monster bosses[], Monster monsters[]);
 };
 
 #endif

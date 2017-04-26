@@ -32,12 +32,17 @@ int main()
 {
 	Player player;
 	Monster monsters[NUMBER_OF_MONSTERS];
+	Monster bosses[NUMBER_OF_BOSSES];
+	string stages[NUMBER_OF_STAGES + 1]; // + 1 for finish
 	Monster monster;
 	string stage = FIRST_STAGE;
-	int playerInt, monsterInt, input;
+	int playerInt, monsterInt, input, bossIndex = 0, stageIndex = 0;
+	bool isBoss = false;
 	
 	srand(time(NULL));
 	loadMonsters(monsters);
+	loadBosses(bosses, monsters);
+	loadStages(stages);
 	player = generatePlayer();
 	
 	do
@@ -54,16 +59,24 @@ int main()
 					break;
 				case BATTLE :
 					monster = initializeBattle(player, stage, monsters, playerInt, monsterInt);
-					battleOperations(player, stage, monster, playerInt, monsterInt);
+					battleOperations(player, monster, playerInt, monsterInt);
+					postBattle(player, monster, stage, stages, stageIndex, isBoss);
 					break;
 				case FACE_BOSS :
+					monster = bosses[bossIndex];
+					bossIndex++;
+					isBoss = true;
+					initializeBattle(player, stage, monsters, playerInt, monsterInt);
+					battleOperations(player, monster, playerInt, monsterInt);
+					postBattle(player, monster, stage, stages, stageIndex, isBoss);
+					isBoss = false;
 					break;
 				default :
 					notifyInvalid();
 			}
 
 		} while (input < EXPLORE && input > FACE_BOSS && player.getHealth() > 0);
-	} while (stage != FINISH);
+	} while (stage != FINISH && player.getHealth() > 0);
 	
 	system("pause");
 
