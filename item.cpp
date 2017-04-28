@@ -32,7 +32,37 @@
  *********************************************************/
 Item::Item() : SpecialAbility()
 {
-	/* needs to be written */
+	mHealMod = 0;
+}
+
+Item::Item(int id)
+{
+	if (id == WATER)
+	{
+		mId = id;
+		mUses = 10;
+		mName = "Water";
+		mPossess = true;
+		mHealMod = 10;
+	}
+
+	else if (id == COFFEE)
+	{
+		mId = id;
+		mUses = 5;
+		mName = "Coffee";
+		mPossess = true;
+		mHealMod = 20;
+	}
+
+	else if (id == APPLE_JUICE)
+	{
+		mId = id;
+		mUses = 2;
+		mName = "Apple Juice";
+		mPossess = true;
+		mHealMod = 50;
+	}
 }
 
 /*		Pre: none
@@ -42,4 +72,30 @@ Item::Item() : SpecialAbility()
 Item::~Item()
 {
 	/* left blank intentionally */
+}
+
+/*
+pre: an int of the new heal modifier
+post: the heal modifier of the object will change
+purpose: to change the heal modifier of an Item object
+*/
+void Item::setHealMod(int newHealMod)
+{
+	mHealMod = newHealMod;
+}
+
+/*
+pre: an Item object must be instantiated
+post: an int containing the heal modifier of the object will be returned
+purpose: to obtain the int containing the heal modifier of the object
+*/
+int Item::getHealMod()
+{
+	return mHealMod;
+}
+
+void Item::useItem(int &health)
+{
+	health += mHealMod;
+	mUses--;
 }

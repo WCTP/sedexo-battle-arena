@@ -86,4 +86,7 @@ enum SODEXO_MONSTERS {
 	CEREAL
 };
 
+const int MAX_ITEMSKILL = 3;
+
+
 #endif
