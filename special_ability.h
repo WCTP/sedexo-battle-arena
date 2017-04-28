@@ -35,7 +35,7 @@ using namespace std;
 class SpecialAbility
 {
 	protected:
-		int mUses;
+		int mUses, mId;
 		string mName;
 		bool mPossess;
 
