@@ -35,6 +35,7 @@ SpecialAbility::SpecialAbility()
 	mName = "";
 	mUses = 0;
 	mPossess = false;
+	mId = 0;
 }
 
 /*		Pre: none
