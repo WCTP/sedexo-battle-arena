@@ -60,6 +60,7 @@ Player::Player(string name, int health, int maxHealth, int speed, int attack, in
 	mExpToLevel = expToLevel;
 	mMoney = money;
 	mLevel = level;
+
 	mNumSkills = 0;
 
 	for (int i = 0; i < MAX_ITEMSKILL; i++)
@@ -76,7 +77,8 @@ Player::Player(string name, int health, int maxHealth, int speed, int attack, in
  *********************************************************/
 Player::~Player()
 {
-	/* left blank intentionally */
+	if (mSkills != NULL)
+		delete[] mSkills;
 }
 
 /*		Pre: none
@@ -95,6 +97,17 @@ int Player::getExp()
 int Player::getExpToLevel()
 {
 	return mExpToLevel;
+}
+
+/*
+getItem
+pre: an int containing the index of the wanted item
+post: an Item object at the index will be returned
+purpose: to get an Item at a certain object
+*/
+Item& Player::getItem(int index)
+{
+	return mItems[index];
 }
 
 /*		Pre: none
@@ -136,17 +149,6 @@ Skill Player::getSkill(int index)
 	return mSkills[index];
 }
 
-/*
-getItem
-pre: an int containing the index of the wanted item
-post: an Item object at the index will be returned
-purpose: to get an Item at a certain object
-*/
-Item& Player::getItem(int index)
-{
-	return mItems[index];
-}
-
 /*		Pre: int
  *	   Post: none
  *	Purpose: sets exp
@@ -163,6 +165,18 @@ void Player::setExp(int exp)
 void Player::setExpToLevel(int expToLevel)
 {
 	mExpToLevel = expToLevel;
+}
+
+/*
+setItem
+pre: an int containing the index of the array, and the needed itemId
+post: an item at the index will change to a new item based on the id
+purpose: to set the item at a location in the array to a new item (note, this will
+reset the amount of uses left on items)
+*/
+void Player::setItem(int index, int itemid)
+{
+	mItems[index] = Item(itemid);
 }
 
 /*		Pre: int
@@ -205,16 +219,42 @@ void Player::setSkill(int index, int skillId)
 	mSkills[index] = Skill(skillId);
 }
 
-/*
-setItem
-pre: an int containing the index of the array, and the needed itemId
-post: an item at the index will change to a new item based on the id
-purpose: to set the item at a location in the array to a new item (note, this will
-reset the amount of uses left on items)
-*/
-void Player::setItem(int index, int itemid)
+/*		Pre: none
+ *	   Post: Player
+ *	Purpose: asks user what class they would like to be
+ *			 and generates a character accordingly
+ *********************************************************/
+Player generatePlayer()
 {
-	mItems[index] = Item(itemid);
+	
+	string name;
+
+	cout << "Enter a Name: ";
+	getline(cin, name);
+
+	/* default stats a player gets */
+	Player player(name, 10, 10, 2, 2, 2, 0, 25, 0, 1);
+	
+	return player;
+}
+
+void Player::levelUp()
+{
+	mLevel++;
+	mMaxHealth += ((rand() % HEALTH_LEVEL_UP_ROLL) + 1);
+	mSpeed += ((rand() % LEVEL_UP_ROLL) + 1);
+	mAttack += ((rand() % LEVEL_UP_ROLL) + 1);
+	mDefense += ((rand() % LEVEL_UP_ROLL) + 1);
+	mExpToLevel += mExpToLevel * ((rand() % 2) + 2);
+
+	cout << right << setw(20) << "LEVEL UP!" << endl;
+	cout << setw(20) << "New Level: " << setw(3) << mLevel << endl;
+	cout << setw(20) << "HP: " << setw(3) << mMaxHealth << endl
+		 << setw(20) << "Attack: " << setw(3) << mAttack << endl
+		 << setw(20) << "Defense: " << setw(3) << mDefense << endl
+		 << setw(20) << "Speed: " << setw(3) << mSpeed << endl
+		 << setw(20) << "Xp to Next Level: " << setw(3) << mExpToLevel << endl;
+	system("pause");
 }
 
 /*
@@ -244,43 +284,14 @@ void Player::unlockSkill(int index)
 
 	mSkills[index].setPossess(true);
 
-	//delete[] temp;
+	temp = NULL;
 
 }
 
-/*		Pre: none
- *	   Post: Player
- *	Purpose: asks user what class they would like to be
- *			 and generates a character accordingly
+/*		Pre: int
+ *	   Post: none
+ *	Purpose: uses item and heals certain amount of health
  *********************************************************/
-Player generatePlayer()
-{
-
-	string name;
-
-	cout << "Enter a Name: ";
-	getline(cin, name);
-
-	/* default stats a player gets */
-	Player player(name, 10, 10, 2, 2, 2, 0, 25, 0, 1);
-
-	return player;
-}
-
-void Player::levelUp()
-{
-	mMaxHealth += ((rand() % HEALTH_LEVEL_UP_ROLL) + 1);
-	mSpeed += ((rand() % LEVEL_UP_ROLL) + 1);
-	mAttack += ((rand() % LEVEL_UP_ROLL) + 1);
-	mDefense += ((rand() % LEVEL_UP_ROLL) + 1);
-	mExpToLevel += mExpToLevel * ((rand() % 2) + 2);
-}
-
-int Player::useSkillBattle(int index)
-{
-	return mSkills[index].useSkill(mAttack);
-}
-
 void Player::useItem(int index)
 {
 	if (mItems[index].getUses() > 0)
@@ -294,5 +305,13 @@ void Player::useItem(int index)
 
 		cout << "Healed for " << mItems[index].getHealMod() << " points!" << endl;
 	}
+}
 
+/*		Pre: int
+ *	   Post: int
+ *	Purpose: returns damage of skill used
+ *********************************************************/
+int Player::useSkillBattle(int index)
+{
+	return mSkills[index].useSkill(mAttack);
 }

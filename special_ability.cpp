@@ -32,6 +32,7 @@
  *********************************************************/
 SpecialAbility::SpecialAbility()
 {
+	mId = 0;
 	mName = "";
 	mUses = 0;
 	mPossess = false;
@@ -41,8 +42,9 @@ SpecialAbility::SpecialAbility()
  *	   Post: none
  *	Purpose: constructor
  *********************************************************/
-SpecialAbility::SpecialAbility(int uses, string name, bool possess)
+SpecialAbility::SpecialAbility(int id, int uses, string name, bool possess)
 {
+	mId = id;
 	mUses = uses;
 	mName = name;
 	mPossess = possess;

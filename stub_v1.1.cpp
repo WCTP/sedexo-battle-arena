@@ -36,7 +36,7 @@ int main()
 	string stages[NUMBER_OF_STAGES + 1]; // + 1 for finish
 	Monster monster;
 	string stage = FIRST_STAGE;
-	int playerInt, monsterInt, input, bossIndex = 0, stageIndex = 0;
+	int playerInt, monsterInt, input, bossIndex = 0, stageIndex = 0, currentSkill = 0;
 	bool isBoss = false;
 	
 	srand(time(NULL));
@@ -44,10 +44,11 @@ int main()
 	loadBosses(bosses, monsters);
 	loadStages(stages);
 	player = generatePlayer();
+
+	player.unlockSkill(currentSkill);
 	
 	do
 	{
-
 		do
 		{
 			input = restMenu(player, stage);
@@ -55,7 +56,8 @@ int main()
 			switch (input)
 			{
 				case EXPLORE : 
-					explore();
+					explore(player, monster, stage, monsters, playerInt, monsterInt,
+						stages, stageIndex, isBoss);
 					break;
 				case BATTLE :
 					monster = initializeBattle(player, stage, monsters, playerInt, monsterInt);
@@ -70,12 +72,18 @@ int main()
 					battleOperations(player, monster, playerInt, monsterInt);
 					postBattle(player, monster, stage, stages, stageIndex, isBoss);
 					isBoss = false;
+					if (currentSkill < MAX_ITEMSKILL)
+					{
+						currentSkill++;
+						player.unlockSkill(currentSkill);
+					}
 					break;
 				default :
 					notifyInvalid();
 			}
 
 		} while (input < EXPLORE && input > FACE_BOSS && player.getHealth() > 0);
+
 	} while (stage != FINISH && player.getHealth() > 0);
 	
 	system("pause");

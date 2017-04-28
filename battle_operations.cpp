@@ -1,27 +1,27 @@
 /*		Author: Adam DeCosta, Jimmy Griffiths, Walter Proulx
-*		Class : CSI-120-06
-*		Assignment : Final Project
-* 		Date Assigned : April 14, 2017
-* 		Due Date : April 28, 2017
-*
-*		Description :
-*			A text-based game that shows everything that was learned so far this semester.
-*			Everything includin dynamic arrays, polymorphism, linked lists, classes, structs,
-*			and inheritance will be included. The game has a Sedexo theme where the player
-*			must get past all the obstacles to win.
-*
-*		Certification of Authenticity :
-*			I certify that this is entirely my own work, except where I have given fully
-*			documented references to the work of others. I understand the definition and
-*			consequences of plagiarism and acknowledge that the assessor of this assignment
-*			may, for the purpose of assessing this assignment :
-*			-	Reproduce this assignment and provide a copy to another member of
-*				academic staff; and / or
-*			-	Communicate a copy of this assignment to a plagiarism checking service
-*				(which may then retain a copy of this assignment on its database for
-*				the purpose of future plagiarism checking)
-*
-***********************************************************************************************/
+ *		Class : CSI-120-06
+ *		Assignment : Final Project
+ * 		Date Assigned : April 14, 2017
+ * 		Due Date : April 28, 2017
+ *	
+ *		Description :
+ *			A text-based game that shows everything that was learned so far this semester.
+ *			Everything includin dynamic arrays, polymorphism, linked lists, classes, structs,
+ *			and inheritance will be included. The game has a Sedexo theme where the player
+ *			must get past all the obstacles to win.
+ *	
+ *		Certification of Authenticity :
+ *			I certify that this is entirely my own work, except where I have given fully 
+ *			documented references to the work of others. I understand the definition and
+ *			consequences of plagiarism and acknowledge that the assessor of this assignment
+ *			may, for the purpose of assessing this assignment :
+ *			-	Reproduce this assignment and provide a copy to another member of
+ *				academic staff; and / or
+ *			-	Communicate a copy of this assignment to a plagiarism checking service
+ *				(which may then retain a copy of this assignment on its database for
+ *				the purpose of future plagiarism checking)
+ *
+ ***********************************************************************************************/
 
 #include "monster.h"
 #include "player.h"
@@ -29,9 +29,9 @@
 #include "battle_operations.h"
 
 /*		Pre: Player, Monster
-*	   Post: none
-*	Purpose: sets health to appropriate levels
-*********************************************************/
+ *	   Post: none
+ *	Purpose: sets health to appropriate levels
+ *********************************************************/
 void attack(Player& player, Monster& monster, int playerInt, int monsterInt)
 {
 	int playerAttack, monsterAttack;
@@ -47,16 +47,16 @@ void attack(Player& player, Monster& monster, int playerInt, int monsterInt)
 	if (playerInt > monsterInt)
 	{
 		monster.setHealth(monster.getHealth() - playerAttack);
-
-		if (monster.getHealth() > 0) // fixed
+		
+		if (player.getHealth() > 0)
 		{
-			player.setHealth(player.getHealth() - monsterAttack);
+			player.setHealth(player.getHealth() - monsterAttack);		
 		}
 	}
 	else
 	{
 		player.setHealth(player.getHealth() - monsterAttack);
-
+		
 		if (player.getHealth() > 0)
 		{
 			monster.setHealth(monster.getHealth() - playerAttack);
@@ -66,42 +66,42 @@ void attack(Player& player, Monster& monster, int playerInt, int monsterInt)
 	cout << player.getName() << " took " << monsterAttack << " damage." << endl;
 	cout << monster.getName() << " took " << playerAttack << " damage." << endl;
 	system("pause");
-
+	
 }
 
 /*		Pre: none
-*	   Post: int
-*	Purpose: shows options in battle and gets input
-*********************************************************/
-int battleMenu(Player player, Monster monster)
+ *	   Post: int
+ *	Purpose: shows options in battle and gets input
+ *********************************************************/
+int battleMenu(Player& player, Monster monster)
 {
 	int input;
 
 	system("cls");
 
-	cout << "--------------------------------------------" << endl
-		<< "-- BATTLE MENU                            --" << endl
-		<< "--------------------------------------------" << endl
-		<< "-- " << setw(20) << left << player.getName() << " HP: "
-		<< setw(4) << player.getHealth() << " / "
-		<< setw(4) << player.getMaxHealth() << "   --"
-		<< endl << "-- Atk: "
-		<< setw(4) << player.getAttack() << " Def: "
-		<< setw(4) << player.getDefense() << " Spd: "
-		<< setw(4) << player.getSpeed() << "          --" << endl
-		<< "-- " << setw(20) << left << monster.getName() << " HP: "
-		<< setw(4) << monster.getHealth() << " / "
-		<< setw(4) << monster.getMaxHealth() << "   --"
-		<< endl << "-- Atk: "
-		<< setw(4) << monster.getAttack() << " Def: "
-		<< setw(4) << monster.getDefense() << " Spd: "
-		<< setw(4) << monster.getSpeed() << "          --" << endl
-		<< "--------------------------------------------" << endl
-		<< "-- 1.) Attack                             --" << endl
-		<< "-- 2.) Skills                             --" << endl
-		<< "-- 3.) Items                              --" << endl
-		<< "--------------------------------------------" << endl
-		<< "  Command: ";
+	cout	<< "--------------------------------------------" << endl
+			<< "-- BATTLE MENU                            --" << endl
+			<< "--------------------------------------------" << endl
+			<< "-- " << setw(20) << left << player.getName() << " HP: " 
+			<< setw(4) << player.getHealth() << " / "
+			<< setw(4) << player.getMaxHealth() << "   --" 
+			<< endl << "-- Atk: " 
+			<< setw(4) << player.getAttack() << " Def: "
+			<< setw(4) << player.getDefense() << " Spd: "
+			<< setw(4) << player.getSpeed() << "          --" << endl
+			<< "-- " << setw(20) << left << monster.getName() << " HP: "
+			<< setw(4) << monster.getHealth() << " / "
+			<< setw(4) << monster.getMaxHealth() << "   --" 
+			<< endl << "-- Atk: "
+			<< setw(4) << monster.getAttack() << " Def: "
+			<< setw(4) << monster.getDefense() << " Spd: "
+			<< setw(4) << monster.getSpeed() << "          --" << endl
+			<< "--------------------------------------------" << endl
+			<< "-- 1.) Attack                             --" << endl
+			<< "-- 2.) Skills                             --" << endl
+			<< "-- 3.) Items                              --" << endl
+			<< "--------------------------------------------" << endl
+			<< "  Command: ";
 
 	cin >> input;
 	cin.clear();
@@ -111,9 +111,9 @@ int battleMenu(Player player, Monster monster)
 }
 
 /*		Pre: none
-*	   Post: none
-*	Purpose: executes command based on input
-*********************************************************/
+ *	   Post: none
+ *	Purpose: executes command based on input
+ *********************************************************/
 void battleOperations(Player& player, Monster monster, int playerInt, int monsterInt)
 {
 	int input = 1;
@@ -124,27 +124,28 @@ void battleOperations(Player& player, Monster monster, int playerInt, int monste
 
 		switch (input)
 		{
-		case ATTACK:
-			attack(player, monster, playerInt, monsterInt);
-			break;
-		case SKILLS:
-			useSkill(player, monster, playerInt, monsterInt);
-			break;
-		case ITEMS:
-			useItem(player, monster, playerInt, monsterInt);
-			break;
-		default:
-			cout << "INVALID COMMAND";
+			case ATTACK : 
+				attack(player, monster, playerInt, monsterInt);
+				break;
+			case SKILLS :
+				useSkill(player, monster, playerInt, monsterInt);
+				break;
+			case ITEMS :
+				useItem(player, monster, playerInt, monsterInt);
+				break;
+			default :
+				cout << "INVALID COMMAND" << endl;
+				system("pause");
 		}
 
 	} while (player.getHealth() > 0 && monster.getHealth() > 0);
 }
 
 /*		Pre: Player, string, Monster, int, int
-*	   Post: Monster
-*	Purpose: initializes initiatives  and monster
-*********************************************************/
-Monster initializeBattle(Player player, string stage, Monster monsters[], int& playerInt, int& monsterInt)
+ *	   Post: Monster
+ *	Purpose: initializes initiatives  and monster
+ *********************************************************/
+Monster initializeBattle(Player& player, string stage, Monster monsters[], int& playerInt, int& monsterInt)
 {
 	Monster monster(stage, monsters);
 
@@ -155,27 +156,28 @@ Monster initializeBattle(Player player, string stage, Monster monsters[], int& p
 }
 
 /*		Pre: Player, Monster, string, string array, int,
-*			 bool
-*	   Post: pass-by-reference string, string array, int
-*	Purpose: handles post battle resetting of HP, leveling
-*			 up, and stage progression
-*********************************************************/
+ *			 bool
+ *	   Post: pass-by-reference string, string array, int
+ *	Purpose: handles post battle resetting of HP, leveling
+ *			 up, and stage progression
+ *********************************************************/
 void postBattle(Player& player, Monster monster, string& stage, string stages[], int& stageIndex, bool isBoss)
 {
 	system("cls");
-
+	
 	if (player.getHealth() > 0)
 	{
 		player.setExp(player.getExp() + monster.getExpAwarded());
-		player.setHealth(player.getMaxHealth());
-
+		
 		if (player.getExp() > player.getExpToLevel())
 		{
 			player.levelUp();
 		}
 
+		player.setHealth(player.getMaxHealth());
+		
 		cout << "You won!" << endl
-			<< "Xp Gained: " << monster.getExpAwarded() << endl;
+			 << "Xp Gained: " << monster.getExpAwarded() << endl;
 		system("pause");
 
 		if (isBoss == true)
@@ -190,13 +192,15 @@ void postBattle(Player& player, Monster monster, string& stage, string stages[],
 	}
 }
 
-/*		Pre: none
-*	   Post: none
-*	Purpose: none
-*********************************************************/
+/*		Pre: Player, Monster, int, int
+ *	   Post: none
+ *	Purpose: uses item based off of user input
+ *********************************************************/
 void useItem(Player& player, Monster& monster, int playerInt, int monsterInt)
 {
 	int input, monsterAttack, playerAttack;
+
+	cout << "-- 0.) Back" << endl;
 
 	for (int i = 0; i < MAX_ITEMSKILL; i++)
 	{
@@ -209,42 +213,46 @@ void useItem(Player& player, Monster& monster, int playerInt, int monsterInt)
 
 	input--;
 
-	monsterAttack = ((monster.getAttack() - player.getDefense() + ((rand() % ATTACK_ROLE) + 1)));
-
-	if (monsterAttack < 0)
+	if (input > -1)
 	{
-		monsterAttack = 0;
+		monsterAttack = ((monster.getAttack() - player.getDefense() + ((rand() % ATTACK_ROLE) + 1)));
+
+			if (monsterAttack < 0)
+			{
+				monsterAttack = 0;
+			}
+
+			if (playerInt > monsterInt)
+			{
+				player.useItem(input);
+
+				player.setHealth(player.getHealth() - monsterAttack);
+			}
+			else
+			{
+				player.setHealth(player.getHealth() - monsterAttack);
+
+				if (player.getHealth() > 0)
+				{
+					player.useItem(input);
+				}
+			}
+
+			cout << player.getName() << " took " << monsterAttack << " damage." << endl;
+			system("pause");
 	}
-
-	if (playerInt > monsterInt)
-	{
-		player.useItem(input);
-
-		player.setHealth(player.getHealth() - monsterAttack);
-	}
-	else
-	{
-		player.setHealth(player.getHealth() - monsterAttack);
-
-		if (player.getHealth() > 0)
-		{
-			player.useItem(input);
-		}
-	}
-
-	cout << player.getName() << " took " << monsterAttack << " damage." << endl;
-	system("pause");
-
 }
 
 
-/*		Pre: none
-*	   Post: none
-*	Purpose: none
-*********************************************************/
+/*		Pre: Player, Monster, int, int
+ *	   Post: none
+ *	Purpose: uses skill based off of user input
+ *********************************************************/
 void useSkill(Player& player, Monster& monster, int playerInt, int monsterInt)
 {
 	int input, monsterAttack, playerAttack;
+
+	cout << "-- 0.) Back" << endl;
 
 	for (int i = 0; i < player.getNumSkills(); i++)
 	{
@@ -257,42 +265,45 @@ void useSkill(Player& player, Monster& monster, int playerInt, int monsterInt)
 
 	input--;
 
-	monsterAttack = ((monster.getAttack() - player.getDefense() + ((rand() % ATTACK_ROLE) + 1)));
-	if (player.getSkill(input).getUses() > 0)
+	if (input > -1)
 	{
-		playerAttack = player.useSkillBattle(input);
-	}
+		monsterAttack = ((monster.getAttack() - player.getDefense() + ((rand() % ATTACK_ROLE) + 1)));
+			if (player.getSkill(input).getUses() > 0)
+			{
+				playerAttack = player.useSkillBattle(input);
+			}
 
-	else
-	{
-		playerAttack = 0;
-	}
+			else
+			{
+				playerAttack = 0;
+			}
 
-	if (playerAttack < 0)
-		playerAttack = 0;
-	if (monsterAttack < 0)
-		monsterAttack = 0;
+			if (playerAttack < 0)
+				playerAttack = 0;
+			if (monsterAttack < 0)
+				monsterAttack = 0;
 
-	if (playerInt > monsterInt)
-	{
-		monster.setHealth(monster.getHealth() - playerAttack);
+			if (playerInt > monsterInt)
+			{
+				monster.setHealth(monster.getHealth() - playerAttack);
 
-		if (monster.getHealth() > 0)
-		{
-			player.setHealth(player.getHealth() - monsterAttack);
-		}
-	}
-	else
-	{
-		player.setHealth(player.getHealth() - monsterAttack);
+				if (monster.getHealth() > 0)
+				{
+					player.setHealth(player.getHealth() - monsterAttack);
+				}
+			}
+			else
+			{
+				player.setHealth(player.getHealth() - monsterAttack);
 
-		if (player.getHealth() > 0)
-		{
-			monster.setHealth(monster.getHealth() - playerAttack);
-		}
-	}
+				if (player.getHealth() > 0)
+				{
+					monster.setHealth(monster.getHealth() - playerAttack);
+				}
+			}
 
-	cout << player.getName() << " took " << monsterAttack << " damage." << endl;
-	cout << monster.getName() << " took " << playerAttack << " damage." << endl;
-	system("pause");
+			cout << player.getName() << " took " << monsterAttack << " damage." << endl;
+			cout << monster.getName() << " took " << playerAttack << " damage." << endl;
+			system("pause");
+	}	
 }

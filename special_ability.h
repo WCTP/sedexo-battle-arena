@@ -35,14 +35,14 @@ using namespace std;
 class SpecialAbility
 {
 	protected:
-		int mUses;
+		int mId, mUses;
 		string mName;
 		bool mPossess;
 
 	public:
 		/* Constructors and Destructors*/
 		SpecialAbility();
-		SpecialAbility(int uses, string name, bool possess);
+		SpecialAbility(int id, int uses, string name, bool possess);
 
 		~SpecialAbility();
 

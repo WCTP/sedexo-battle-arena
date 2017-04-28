@@ -54,32 +54,26 @@ class Player : public Entity
 		/* Getters */
 		int getExp();
 		int getExpToLevel();
+		Item& getItem(int index);
 		int getLevel();
 		int getMoney();
 		int getNumSkills();
 		Skill getSkill(int index);
-		Item& getItem(int index);
 
 		/* Setters */
 		void setExp(int exp);
 		void setExpToLevel(int expToLevel);
+		void setItem(int index, int itemid);
 		void setLevel(int level);
 		void setMoney(int money);
 		void setNumSkills(int numSkills);
 		void setSkill(int index, int skillid);
-		void setItem(int index, int itemid);
-
-		void unlockSkill(int index);
 
 		friend Player generatePlayer();
-
 		void levelUp();
-
+		void unlockSkill(int index);
 		void useItem(int index);
-
 		int useSkillBattle(int index);
-
-		
 };
 
 #endif
