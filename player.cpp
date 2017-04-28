@@ -36,6 +36,12 @@ Player::Player() : Entity()
 	mExpToLevel = 0;
 	mMoney = 0;
 	mLevel = 0;
+	mNumSkills = 0;
+
+	for (int i = 0; i < MAX_ITEMSKILL; i++)
+	{
+		mItems[i] = Item();
+	}
 }
 
 /*		Pre: none
@@ -54,6 +60,14 @@ Player::Player(string name, int health, int maxHealth, int speed, int attack, in
 	mExpToLevel = expToLevel;
 	mMoney = money;
 	mLevel = level;
+	mNumSkills = 0;
+
+	for (int i = 0; i < MAX_ITEMSKILL; i++)
+	{
+		mItems[i] = Item(i);
+	}
+
+	mSkills = NULL;
 }
 
 /*		Pre: none
@@ -101,6 +115,38 @@ int Player::getMoney()
 	return mMoney;
 }
 
+/*
+pre: none
+post: int
+purpose: get the number of skills
+*/
+int Player::getNumSkills()
+{
+	return mNumSkills;
+}
+
+/*
+getSkill
+pre: an int containing the index of the wanted skill
+post: the skill at the index will be returned
+purpose: to get the skill at a certain index
+*/
+Skill Player::getSkill(int index)
+{
+	return mSkills[index];
+}
+
+/*
+getItem
+pre: an int containing the index of the wanted item
+post: an Item object at the index will be returned
+purpose: to get an Item at a certain object
+*/
+Item& Player::getItem(int index)
+{
+	return mItems[index];
+}
+
 /*		Pre: int
  *	   Post: none
  *	Purpose: sets exp
@@ -137,6 +183,71 @@ void Player::setMoney(int money)
 	mMoney = money;
 }
 
+/*
+pre: int
+post: none
+purpose: set number of skills
+*/
+void Player::setNumSkills(int numSkills)
+{
+	mNumSkills = numSkills;
+}
+
+/*
+setSkill
+pre: an int containing the index of the array, and the needed skillId
+post: a skill at the index will change to a new skill based on the id
+purpose: to change the skill at a location in the array to a new skill (note, this will reset
+whether the player possesses the skill or not)
+*/
+void Player::setSkill(int index, int skillId)
+{
+	mSkills[index] = Skill(skillId);
+}
+
+/*
+setItem
+pre: an int containing the index of the array, and the needed itemId
+post: an item at the index will change to a new item based on the id
+purpose: to set the item at a location in the array to a new item (note, this will
+reset the amount of uses left on items)
+*/
+void Player::setItem(int index, int itemid)
+{
+	mItems[index] = Item(itemid);
+}
+
+/*
+unlockSkill
+pre: an index of the skill that will be unlocked
+post: a skill at a certain index that is possessed will be true
+purpose: to set the skill at a certain index will be set to true
+*/
+void Player::unlockSkill(int index)
+{
+	int i;
+	mNumSkills++;
+	Skill* temp = new Skill[mNumSkills];
+
+	for (i = 0; i < mNumSkills - 1; i++)
+	{
+		temp[i] = mSkills[i];
+	}
+
+	temp[i] = Skill(index);
+
+	delete[] mSkills;
+
+	mSkills = temp;
+
+	cout << mSkills[index].getName() << " unlocked!" << endl;
+
+	mSkills[index].setPossess(true);
+
+	//delete[] temp;
+
+}
+
 /*		Pre: none
  *	   Post: Player
  *	Purpose: asks user what class they would like to be
@@ -144,7 +255,7 @@ void Player::setMoney(int money)
  *********************************************************/
 Player generatePlayer()
 {
-	
+
 	string name;
 
 	cout << "Enter a Name: ";
@@ -152,25 +263,36 @@ Player generatePlayer()
 
 	/* default stats a player gets */
 	Player player(name, 10, 10, 2, 2, 2, 0, 25, 0, 1);
-	
+
 	return player;
 }
 
 void Player::levelUp()
 {
-	mLevel++;
 	mMaxHealth += ((rand() % HEALTH_LEVEL_UP_ROLL) + 1);
 	mSpeed += ((rand() % LEVEL_UP_ROLL) + 1);
 	mAttack += ((rand() % LEVEL_UP_ROLL) + 1);
 	mDefense += ((rand() % LEVEL_UP_ROLL) + 1);
 	mExpToLevel += mExpToLevel * ((rand() % 2) + 2);
+}
 
-	cout << right << setw(20) << "LEVEL UP!" << endl;
-	cout << setw(20) << "New Level: " << setw(3) << mLevel << endl;
-	cout << setw(20) << "HP: " << setw(3) << mMaxHealth << endl
-		 << setw(20) << "Attack: " << setw(3) << mAttack << endl
-		 << setw(20) << "Defense: " << setw(3) << mDefense << endl
-		 << setw(20) << "Speed: " << setw(3) << mSpeed << endl
-		 << setw(20) << "Xp to Next Level: " << setw(3) << mExpToLevel << endl;
-	system("pause");
+int Player::useSkillBattle(int index)
+{
+	return mSkills[index].useSkill(mAttack);
+}
+
+void Player::useItem(int index)
+{
+	if (mItems[index].getUses() > 0)
+	{
+		mItems[index].useItem(mHealth);
+
+		if (mHealth > mMaxHealth)
+		{
+			mHealth = mMaxHealth;
+		}
+
+		cout << "Healed for " << mItems[index].getHealMod() << " points!" << endl;
+	}
+
 }
