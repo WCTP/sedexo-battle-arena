@@ -26,13 +26,58 @@
 #include "rest_operations.h"
 #include "battle_operations.h"
 
-/*		Pre: none
+/*		Pre: Player, Monster, string, Monster array,
+ *			 int, int, string array, int, bool
  *	   Post: none
  *	Purpose: explores room based off of random variables
  *********************************************************/
-void explore()
+void explore(Player &player, Monster &monster, string stage, Monster monsters[], int playerInt, int monsterInt,
+			 string stages[], int stageIndex, bool isBoss)
 {
-	/* needs to be written */
+	int randChoice = rand() % 20 + 1;
+
+	if (randChoice == 1)
+	{
+		player.setHealth(player.getMaxHealth());
+		for (int i = 0; i < player.getNumSkills(); i++)
+		{
+			player.setSkill(i, i);
+			player.getSkill(i).setPossess(true);
+		}
+
+		for (int i = 0; i < MAX_ITEMSKILL; i++)
+		{
+			player.setItem(i, i);
+		}
+
+		cout << "Mr. Sodexo blesses " << player.getName() << endl;
+
+		system("pause");
+	}
+
+	else if (randChoice > 1 && randChoice <= 6)
+	{
+		int randItem = rand() % 3;
+
+		player.getItem(randItem).setUses(player.getItem(randItem).getUses() + 1);
+
+		cout << player.getName() << " found a " << player.getItem(randItem).getName() << endl;
+
+		system("pause");
+	}
+
+	else
+	{
+		cout << "A battle!!!!!!!" << endl;
+
+		system("pause");
+
+		monster = initializeBattle(player, stage, monsters, playerInt, monsterInt);
+		battleOperations(player, monster, playerInt, monsterInt);
+		postBattle(player, monster, stage, stages, stageIndex, isBoss);
+
+	}
+
 }
 
 /*		Pre: none
@@ -100,15 +145,4 @@ int restMenu(Player player, string stage)
 	cin.ignore(INT_MAX, '\n');
 
 	return input;
-}
-
-/*		Pre: none
- *	   Post: none
- *	Purpose: executes command based on input
- *********************************************************/
-void restOperations(Player player, string stage, Monster monsters[])
-{
-	int input = 1;
-
-	// put in main, function needs to be deleted
 }

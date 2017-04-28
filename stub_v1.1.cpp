@@ -44,6 +44,8 @@ int main()
 	loadBosses(bosses, monsters);
 	loadStages(stages);
 	player = generatePlayer();
+
+	player.unlockSkill(0);
 	
 	do
 	{
@@ -55,7 +57,8 @@ int main()
 			switch (input)
 			{
 				case EXPLORE : 
-					explore();
+					explore(player, monster, stage, monsters, playerInt, monsterInt,
+						stages, stageIndex, isBoss);
 					break;
 				case BATTLE :
 					monster = initializeBattle(player, stage, monsters, playerInt, monsterInt);

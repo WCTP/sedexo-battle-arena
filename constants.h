@@ -35,6 +35,8 @@ using namespace std;
 const int MAX_INITIATIVE = 20;
 const int MIN_INITIATIVE = 0;
 
+const int MAX_ITEMSKILL = 3;
+
 const int NUMBER_OF_MONSTERS = 42;
 const int NUMBER_OF_BOSSES = 7;
 const int NUMBER_OF_STAGES = 7;

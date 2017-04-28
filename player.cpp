@@ -36,6 +36,12 @@ Player::Player() : Entity()
 	mExpToLevel = 0;
 	mMoney = 0;
 	mLevel = 0;
+	mNumSkills = 0;
+
+	for (int i = 0; i < MAX_ITEMSKILL; i++)
+	{
+		mItems[i] = Item();
+	}
 }
 
 /*		Pre: none
@@ -54,6 +60,15 @@ Player::Player(string name, int health, int maxHealth, int speed, int attack, in
 	mExpToLevel = expToLevel;
 	mMoney = money;
 	mLevel = level;
+
+	mNumSkills = 0;
+
+	for (int i = 0; i < MAX_ITEMSKILL; i++)
+	{
+		mItems[i] = Item(i);
+	}
+
+	mSkills = NULL;
 }
 
 /*		Pre: none
@@ -83,6 +98,17 @@ int Player::getExpToLevel()
 	return mExpToLevel;
 }
 
+/*
+getItem
+pre: an int containing the index of the wanted item
+post: an Item object at the index will be returned
+purpose: to get an Item at a certain object
+*/
+Item& Player::getItem(int index)
+{
+	return mItems[index];
+}
+
 /*		Pre: none
  *	   Post: int
  *	Purpose: retrieves level
@@ -99,6 +125,27 @@ int Player::getLevel()
 int Player::getMoney()
 {
 	return mMoney;
+}
+
+/*
+pre: none
+post: int
+purpose: get the number of skills
+*/
+int Player::getNumSkills()
+{
+	return mNumSkills;
+}
+
+/*
+getSkill
+pre: an int containing the index of the wanted skill
+post: the skill at the index will be returned
+purpose: to get the skill at a certain index
+*/
+Skill Player::getSkill(int index)
+{
+	return mSkills[index];
 }
 
 /*		Pre: int
@@ -119,6 +166,18 @@ void Player::setExpToLevel(int expToLevel)
 	mExpToLevel = expToLevel;
 }
 
+/*
+setItem
+pre: an int containing the index of the array, and the needed itemId
+post: an item at the index will change to a new item based on the id
+purpose: to set the item at a location in the array to a new item (note, this will
+reset the amount of uses left on items)
+*/
+void Player::setItem(int index, int itemid)
+{
+	mItems[index] = Item(itemid);
+}
+
 /*		Pre: int
  *	   Post: none
  *	Purpose: sets level
@@ -135,6 +194,28 @@ void Player::setLevel(int level)
 void Player::setMoney(int money)
 {
 	mMoney = money;
+}
+
+/*
+pre: int
+post: none
+purpose: set number of skills
+*/
+void Player::setNumSkills(int numSkills)
+{
+	mNumSkills = numSkills;
+}
+
+/*
+setSkill
+pre: an int containing the index of the array, and the needed skillId
+post: a skill at the index will change to a new skill based on the id
+purpose: to change the skill at a location in the array to a new skill (note, this will reset
+whether the player possesses the skill or not)
+*/
+void Player::setSkill(int index, int skillId)
+{
+	mSkills[index] = Skill(skillId);
 }
 
 /*		Pre: none
@@ -173,4 +254,64 @@ void Player::levelUp()
 		 << setw(20) << "Speed: " << setw(3) << mSpeed << endl
 		 << setw(20) << "Xp to Next Level: " << setw(3) << mExpToLevel << endl;
 	system("pause");
+}
+
+/*
+unlockSkill
+pre: an index of the skill that will be unlocked
+post: a skill at a certain index that is possessed will be true
+purpose: to set the skill at a certain index will be set to true
+*/
+void Player::unlockSkill(int index)
+{
+	int i;
+	mNumSkills++;
+	Skill* temp = new Skill[mNumSkills];
+
+	for (i = 0; i < mNumSkills - 1; i++)
+	{
+		temp[i] = mSkills[i];
+	}
+
+	temp[i] = Skill(index);
+
+	delete[] mSkills;
+
+	mSkills = temp;
+
+	cout << mSkills[index].getName() << " unlocked!" << endl;
+
+	mSkills[index].setPossess(true);
+
+	//delete[] temp; 
+	// breaks program???
+
+}
+
+/*		Pre: int
+ *	   Post: none
+ *	Purpose: uses item and heals certain amount of health
+ *********************************************************/
+void Player::useItem(int index)
+{
+	if (mItems[index].getUses() > 0)
+	{
+		mItems[index].useItem(mHealth);
+
+		if (mHealth > mMaxHealth)
+		{
+			mHealth = mMaxHealth;
+		}
+
+		cout << "Healed for " << mItems[index].getHealMod() << " points!" << endl;
+	}
+}
+
+/*		Pre: int
+ *	   Post: int
+ *	Purpose: returns damage of skill used
+ *********************************************************/
+int Player::useSkillBattle(int index)
+{
+	return mSkills[index].useSkill(mAttack);
 }

@@ -32,10 +32,10 @@
 #include "player.h"
 #include "monster.h"
 
-void explore();
+void explore(Player &player, Monster &monster, string stage, Monster monsters[], int playerInt, int monsterInt,
+	string stages[], int stageIndex, bool isBoss);
 void loadStages(string stages[]);
 void notifyInvalid();
 int restMenu(Player player, string stage);
-void restOperations(Player player, string stage, Monster monsters[]);
 
 #endif

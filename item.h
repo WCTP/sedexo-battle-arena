@@ -30,15 +30,26 @@
 #include <string>
 #include "special_ability.h"
 
+const enum itemId{WATER = 0, COFFEE, APPLE_JUICE};
+
 class Item : public SpecialAbility
 {
 	protected: 
+		int mId, mHealMod;
 
 	public:
 		/* Constructors and Destructors*/
 		Item();
+		Item(int id);
 
 		~Item();
+
+		/* Setters and Getters */
+		void setHealMod(int mod);
+
+		int getHealMod();
+
+		void useItem(int &health);
 };
 
 #endif

@@ -30,15 +30,28 @@
 #include <string>
 #include "special_ability.h"
 
+const enum skillId{COOK = 0, THROW_FORK, WASH_DISHES};
+
 class Skill : public SpecialAbility
 {
-	protected: 
+	private:
+		int mId, mDamageMod;
 
 	public:
 		/* Constructors and Destructors*/
 		Skill();
+		Skill(int id);
 
 		~Skill();
+
+		/* Getters */
+		int getDamageMod();
+
+		/* Setters */
+		void setDamageMod(int newMod);
+
+		int useSkill(int attack);
+
 };
 
 #endif

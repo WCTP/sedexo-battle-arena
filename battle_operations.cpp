@@ -128,13 +128,14 @@ void battleOperations(Player& player, Monster monster, int playerInt, int monste
 				attack(player, monster, playerInt, monsterInt);
 				break;
 			case SKILLS :
-				useSkill();
+				useSkill(player, monster, playerInt, monsterInt);
 				break;
 			case ITEMS :
-				useItem();
+				useItem(player, monster, playerInt, monsterInt);
 				break;
 			default :
 				cout << "INVALID COMMAND";
+				system("pause");
 		}
 
 	} while (player.getHealth() > 0 && monster.getHealth() > 0);
@@ -190,21 +191,118 @@ void postBattle(Player& player, Monster monster, string& stage, string stages[],
 	}
 }
 
-/*		Pre: none
+/*		Pre: Player, Monster, int, int
  *	   Post: none
- *	Purpose: none
+ *	Purpose: uses item based off of user input
  *********************************************************/
-void useItem()
+void useItem(Player& player, Monster& monster, int playerInt, int monsterInt)
 {
-	/* needs to be written */
+	int input, monsterAttack, playerAttack;
+
+	cout << "-- 0.) Back" << endl;
+
+	for (int i = 0; i < MAX_ITEMSKILL; i++)
+	{
+		cout << "-- " << i + 1 << ".) " << player.getItem(i).getName() << " Uses: " << player.getItem(i).getUses() << "--" << endl;
+	}
+
+	cin >> input;
+	cin.clear();
+	cin.ignore(INT_MAX, '\n');
+
+	input--;
+
+	if (input > -1)
+	{
+		monsterAttack = ((monster.getAttack() - player.getDefense() + ((rand() % ATTACK_ROLE) + 1)));
+
+			if (monsterAttack < 0)
+			{
+				monsterAttack = 0;
+			}
+
+			if (playerInt > monsterInt)
+			{
+				player.useItem(input);
+
+				player.setHealth(player.getHealth() - monsterAttack);
+			}
+			else
+			{
+				player.setHealth(player.getHealth() - monsterAttack);
+
+				if (player.getHealth() > 0)
+				{
+					player.useItem(input);
+				}
+			}
+
+			cout << player.getName() << " took " << monsterAttack << " damage." << endl;
+			system("pause");
+	}
 }
 
 
-/*		Pre: none
+/*		Pre: Player, Monster, int, int
  *	   Post: none
- *	Purpose: none
+ *	Purpose: uses skill based off of user input
  *********************************************************/
-void useSkill()
+void useSkill(Player& player, Monster& monster, int playerInt, int monsterInt)
 {
-	/* needs to be written */
+	int input, monsterAttack, playerAttack;
+
+	cout << "-- 0.) Back" << endl;
+
+	for (int i = 0; i < player.getNumSkills(); i++)
+	{
+		cout << "-- " << i + 1 << ".) " << player.getSkill(i).getName() << " Uses: " << player.getSkill(i).getUses() << "--" << endl;
+	}
+
+	cin >> input;
+	cin.clear();
+	cin.ignore(INT_MAX, '\n');
+
+	input--;
+
+	if (input > -1)
+	{
+		monsterAttack = ((monster.getAttack() - player.getDefense() + ((rand() % ATTACK_ROLE) + 1)));
+			if (player.getSkill(input).getUses() > 0)
+			{
+				playerAttack = player.useSkillBattle(input);
+			}
+
+			else
+			{
+				playerAttack = 0;
+			}
+
+			if (playerAttack < 0)
+				playerAttack = 0;
+			if (monsterAttack < 0)
+				monsterAttack = 0;
+
+			if (playerInt > monsterInt)
+			{
+				monster.setHealth(monster.getHealth() - playerAttack);
+
+				if (monster.getHealth() > 0)
+				{
+					player.setHealth(player.getHealth() - monsterAttack);
+				}
+			}
+			else
+			{
+				player.setHealth(player.getHealth() - monsterAttack);
+
+				if (player.getHealth() > 0)
+				{
+					monster.setHealth(monster.getHealth() - playerAttack);
+				}
+			}
+
+			cout << player.getName() << " took " << monsterAttack << " damage." << endl;
+			cout << monster.getName() << " took " << playerAttack << " damage." << endl;
+			system("pause");
+	}	
 }
